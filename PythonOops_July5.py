@@ -430,3 +430,62 @@ Class Order with cart, delivery address
 Use multiple inheritance for Customer and DeliveryAgent
 '''
 
+class Restaurant:
+    def __init__(self, name,menu):
+        self.name = name
+        self.menu = menu
+
+    def show_menu(self):
+        print(f"Menu Name: {self.name}")
+        for item, price in self.menu.items():
+            print(f"{item}: {price}")
+
+class Order:
+    def __init__(self, restaurant, customer, delivery_address):
+        self.restaurant = restaurant
+        self.customer = customer
+        self.delivery_address = delivery_address
+        self.cart = []
+
+    def add_item(self, item):
+        if item in self.restaurant.menu:
+            self.cart.append(item)
+            print(f"{item} added to cart")
+        else:
+            print(f"{item} not available in {self.restaurant.name}")
+
+    def total_price(self):
+        return sum(self.restaurant.menu[item] for item in self.cart)
+
+    def summary(self):
+        print("\n Order summary")
+        print(f"Customer Name: {self.customer.name}")
+        print(f"Delivery Address: {self.delivery_address}")
+        print("Items:",",".join(self.cart))
+        print(f"Total Price: {self.total_price()}")
+
+class Customer:
+    def __init__(self, name, phone):
+        self.name = name
+        self.phone = phone
+
+class DeliveryAgent:
+    def __init__(self, agent_name, vehicle_name):
+        self.agent_name = agent_name
+        self.vehicle_name = vehicle_name
+
+class User(Customer, DeliveryAgent):
+    def __init__(self, name, phone, agent_name=None, vehicle_name=None):
+        Customer.__init__(self, name, phone)
+        if agent_name and vehicle_name:
+            DeliveryAgent.__init__(self, agent_name, vehicle_name)
+
+menu ={'dosa':60, 'idly':30,'puri':50}
+rest =Restaurant("Taza Tiffins", menu)
+
+cus = Customer("Praneeth",992299339944)
+
+order = Order(rest, cus, 'DLF')
+order.add_item('dosa')
+order.add_item('puri')
+order.summary()
