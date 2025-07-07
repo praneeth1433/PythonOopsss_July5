@@ -1,5 +1,5 @@
 '''
-Design a class hierarchy for a Library System.
+1. Design a class hierarchy for a Library System.
 Base class: Item (with title, author, ID)
 Subclasses: Book, Magazine, DVD
 Implement methods like check_out() and return_item()
@@ -56,7 +56,7 @@ book1.return_item()
 print('......................................................................2')
 
 '''
-Create a Billing System for an Online Store.
+2. Create a Billing System for an Online Store.
 
 Class Product: name, price
 Class Cart: list of products, add/remove item, calculate total
@@ -67,7 +67,7 @@ class Product:
     def __init__(self, name, price):
         self.name = name
         if price > 0:
-            self.__price = price
+            self.__price = price      #using price private method....
         else:
             self.__price = 0
 
@@ -131,6 +131,7 @@ Base class: Vehicle
 Subclasses: Car, Bike, Truck
 Each subclass should override a method move() with its own behavior.
 '''
+#polymorphism
 
 class Vehicle:
     def __init__(self, name):
